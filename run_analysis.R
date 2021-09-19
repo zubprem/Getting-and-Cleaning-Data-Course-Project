@@ -1,6 +1,6 @@
 library(dplyr)
 
-# Dowloading the dataset and unzipping in current working directory
+# Downloading the dataset and unzipping in current working directory
 
  
 download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", destfile = 'course_project.zip')
@@ -35,7 +35,7 @@ Merged_Set <- cbind(Subject_Number, Test_train_activity , Test_train_features)
 Merged_Set <- Merged_Set %>% select(subject_number, activity_code, contains("mean"), contains("std"))
 
 
-# Replaction activity code numbers with actual activity name
+# Replacing activity code numbers with actual activity name
 
 
 Merged_Set$activity_code <- activities[Merged_Set$activity_code, 2]
@@ -65,10 +65,24 @@ names(Merged_Set)<-gsub("gravity", "Gravity", names(Merged_Set))
 Final_Data_Frame <- Merged_Set %>%
   group_by(subject_number, activity) %>%
   summarise_all(funs(mean))
-write.table(FinalData, "FinalDataFrame.txt", row.name=FALSE)
+write.table(Final_Data_Frame, "FinalDataFrame.txt", row.name=FALSE)
 
 
 Final_Data_Frame
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
